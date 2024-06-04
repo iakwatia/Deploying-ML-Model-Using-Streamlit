@@ -1,8 +1,8 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title='History Page',
+    page_title='Home Page',
     layout='wide'
 )
 
-st.title('History')
+st.title('Customer Churn Prediction')
