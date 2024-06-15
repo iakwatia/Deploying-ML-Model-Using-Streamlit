@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
+import datetime
 
+#set up page config
 st.set_page_config(
     page_title='Predict Page',
     layout='wide'
@@ -10,6 +13,7 @@ st.set_page_config(
 st.title('Make Customer Churn Predictions')
 
 
+#load models
 st.cache_resource()
 def load_forest_pipeline():
     pipeline = joblib.load('./model/forest_pipeline.joblib')
@@ -22,6 +26,7 @@ def load_logistic_pipeline():
     return pipeline
 
 
+#define select model function
 st.cache_resource(show_spinner='Models loading...')
 def select_model():
     col1, col2 = st.columns(2)
@@ -36,10 +41,16 @@ def select_model():
     else:
         pipeline = load_logistic_pipeline()
 
+    #load encoder
     encoder = joblib.load('./model/encoder.joblib')
 
     return pipeline, encoder
 
+
+if 'prediction' not in st.session_state:
+    st.session_state['prediction'] = None
+if 'probability' not in st.session_state:
+    st.session_state['probability'] =None
 
 def make_prediction(pipeline, encoder):
     gender = st.session_state['gender']
@@ -72,25 +83,33 @@ def make_prediction(pipeline, encoder):
                'monthlycharges', 'totalcharges']
     
 
+    #create a dataframe
     df = pd.DataFrame(data, columns=columns)
 
+   
+    df['Prediction Time'] = datetime.date.today()
+    df['Model Used'] = st.session_state['selected_model']
+   
 
+    df.to_csv('./data/history.csv', mode='a', header=not os.path.exists('./data/history.csv'), index=False)
+    
+    #make a prediction
     pred = pipeline.predict(df)
     pred_int = int(pred[0])
     prediction = encoder.inverse_transform([pred_int])
+
+    
+    # Get probabilities
     probability = pipeline.predict_proba(df)
 
+    
+    #update session state
     st.session_state['prediction'] = prediction
     st.session_state['probability'] = probability
 
     return prediction, probability 
 
 
-if 'prediction' not in st.session_state:
-    st.session_state['prediction'] = None
-if 'probability' not in st.session_state:
-    st.session_state['probability'] =None
-  
 
 def display_form():
 
@@ -125,23 +144,25 @@ def display_form():
         st.selectbox('Have you subscribed to streamingtv', options=['Yes', 'No'], key='streamingtv')
         st.selectbox('Do you have online backup', options=['Yes', 'No'], key='onlinebackup')
 
-        st.form_submit_button('Submit', on_click=make_prediction, kwargs=dict(pipeline=pipeline, encoder=encoder))
+        st.form_submit_button('Make Prediction', on_click=make_prediction, kwargs=dict(pipeline=pipeline, encoder=encoder))
    
 
 
 
 if __name__ == '__main__':
-   
+    
     display_form()
 
+    prediction = st.session_state['prediction']
+    probability = st.session_state['probability']
 
-    final_prediction = st.session_state['prediction']
-
-    if not final_prediction:
-        st.write('### Predictions show here!')
-        st.divider()
+    if not prediction:
+        st.markdown("### Predictions will show here")
+    elif prediction == "Yes":
+        probability_of_yes = probability[0][1] * 100
+        st.markdown(f"### You will lose the customer with a probability of {round(probability_of_yes, 2)}%")
     else:
-        st.write(f'## {final_prediction}')
-
+        propability_of_no = probability[0][0] * 100
+        st.markdown(f"### You will not lose the customer with a probability of {round(propability_of_no, 2)}%")
 
     st.write(st.session_state)

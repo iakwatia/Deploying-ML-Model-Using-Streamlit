@@ -1,0 +1,11 @@
+gender,seniorcitizen,partner,dependents,tenure,phoneservice,multiplelines,internetservice,onlinesecurity,onlinebackup,deviceprotection,techsupport,streamingtv,streamingmovies,contract,paperlessbilling,paymentmethod,monthlycharges,totalcharges,Prediction Time,Model Used
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,2024-06-12,Logistic Regression
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,2024-06-12,Logistic Regression,No
+Female,0,No,No,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,2024-06-12,Random Forest,No
+Male,0,No,No,12,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,One year,Yes,Credit Card,10,120,2024-06-13,Random Forest,
+Male,0,No,No,12,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,One year,Yes,Credit Card,10,120,2024-06-13,Logistic Regression,No
+Male,0,No,No,12,Yes,No,No,No,No,No,No,No,No,One year,No,Credit Card,10,120,2024-06-13,Logistic Regression,No
+Male,0,No,No,12,Yes,No,No,No,No,No,No,No,No,One year,No,Credit Card,10,120,2024-06-13,Random Forest,No
+Male,0,No,No,1,Yes,No,No,No,No,No,No,No,No,Month-to-month,No,Mailed check,10,10,2024-06-13,Random Forest,No
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,2024-06-14,Random Forest
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic Check,10,10,2024-06-14,Random Forest
