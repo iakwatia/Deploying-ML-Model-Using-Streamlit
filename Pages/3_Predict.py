@@ -86,29 +86,35 @@ def make_prediction(pipeline, encoder):
     #create a dataframe
     df = pd.DataFrame(data, columns=columns)
 
-   
-    df['Prediction Time'] = datetime.date.today()
-    df['Model Used'] = st.session_state['selected_model']
-   
-
-    df.to_csv('./data/history.csv', mode='a', header=not os.path.exists('./data/history.csv'), index=False)
-    
     #make a prediction
     pred = pipeline.predict(df)
     pred_int = int(pred[0])
+    
     prediction = encoder.inverse_transform([pred_int])
-
     
     # Get probabilities
     probability = pipeline.predict_proba(df)
+    # probability_of_yes = st.session_state['probability'][0][1]
+    # propability_of_no  = st.session_state['probability'][0][0]
 
-    
     #update session state
     st.session_state['prediction'] = prediction
     st.session_state['probability'] = probability
+    
+    df['prediction'] = prediction
+    
+    if prediction == 'No':
+        df['probability']= f'{round(probability[0][0], 2)}'
+    else:
+        df['probability'] = f'{round(probability[0][1], 2)}'
 
-    return prediction, probability 
+    #df['probability'] = probability
+    df['time_of_prediction']= datetime.date.today()
+    df['model_used'] = st.session_state['selected_model']
 
+    df.to_csv('./data/history.csv', mode='a', header=not os.path.exists('./data/history.csv'), index=False)
+
+    return prediction, probability
 
 
 def display_form():
@@ -153,16 +159,35 @@ if __name__ == '__main__':
     
     display_form()
 
-    prediction = st.session_state['prediction']
-    probability = st.session_state['probability']
+    final_prediction = st.session_state['prediction']
+    probability_of_yes = st.session_state['probability'][0][1]
+    propability_of_no = st.session_state['probability'][0][0]
 
-    if not prediction:
-        st.markdown("### Predictions will show here")
-    elif prediction == "Yes":
-        probability_of_yes = probability[0][1] * 100
-        st.markdown(f"### You will lose the customer with a probability of {round(probability_of_yes, 2)}%")
+    if not final_prediction:
+        st.write("### Predictions will show here")
+        st.divider()
+    elif final_prediction == 'Yes':
+        st.write(f'### {final_prediction}')
+        st.write(f'### {probability_of_yes}') 
     else:
-        propability_of_no = probability[0][0] * 100
-        st.markdown(f"### You will not lose the customer with a probability of {round(propability_of_no, 2)}%")
+        st.write(f'### {final_prediction}')
+        st.write(f'### {propability_of_no}') 
+        
+
+      
+        # col1, col2 = st.columns(2)
+
+        # with col1:
+        #    st.write(f"### prediction:{final_prediction[0]}")
+
+        # with col2:
+        #     if final_prediction[0] == 'No':
+                
+        #         st.write(f' ### Probability: {round(propability_of_no, 2)}')
+        #     else:
+        #         st.write(f' ### Probability: {round(probability_of_yes, 2)}')
+
+
+    st.divider()
 
     st.write(st.session_state)
