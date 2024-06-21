@@ -108,7 +108,7 @@ def make_prediction(pipeline, encoder):
     else:
         df['probability'] = f'{round(probability[0][1], 2)}'
 
-    #df['probability'] = probability
+    
     df['time_of_prediction']= datetime.date.today()
     df['model_used'] = st.session_state['selected_model']
 
@@ -160,33 +160,21 @@ if __name__ == '__main__':
     display_form()
 
     final_prediction = st.session_state['prediction']
-    probability_of_yes = st.session_state['probability'][0][1]
-    propability_of_no = st.session_state['probability'][0][0]
+    probability_of_yes = st.session_state['probability'][0][1] * 100
+    propability_of_no = st.session_state['probability'][0][0] * 100
 
     if not final_prediction:
         st.write("### Predictions will show here")
         st.divider()
     elif final_prediction == 'Yes':
         st.write(f'### {final_prediction}')
-        st.write(f'### {probability_of_yes}') 
+        st.write(f'### {round(probability_of_yes, 2)}%') 
     else:
         st.write(f'### {final_prediction}')
-        st.write(f'### {propability_of_no}') 
+        st.write(f'### {round(propability_of_no, 2)}%') 
         
 
       
-        # col1, col2 = st.columns(2)
-
-        # with col1:
-        #    st.write(f"### prediction:{final_prediction[0]}")
-
-        # with col2:
-        #     if final_prediction[0] == 'No':
-                
-        #         st.write(f' ### Probability: {round(propability_of_no, 2)}')
-        #     else:
-        #         st.write(f' ### Probability: {round(probability_of_yes, 2)}')
-
 
     st.divider()
 
