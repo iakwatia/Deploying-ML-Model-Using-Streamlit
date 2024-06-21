@@ -7,7 +7,9 @@ st.set_page_config(
     layout='wide'
 )
 
-st.title('Prediction History')
+if __name__ == '__main__':
+
+    st.title('Prediction History')
 st.write('This page displays the history of predictions made.')
 csv_path= './data/history.csv'
 
@@ -22,7 +24,5 @@ else:
 
 
 
-# Set up the layout of the history page
 
 
-# Display the prediction history as a table

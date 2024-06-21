@@ -26,18 +26,18 @@ def eda_dashboard():
 
        
     with col2:
-        corr_matrix = df.corr(numeric_only=True)
-        correlation_matrix=px.imshow(corr_matrix, text_auto=True, width = 1080, height = 760,
-                title= f"correlation matrix")
-        st.plotly_chart(correlation_matrix)
-
+        
         churn=px.histogram(df, x=df['churn'], text_auto=True, color=df["churn"], 
                      title=f"Number of customers who churn")
         st.plotly_chart(churn)
 
+        corr_matrix = df.corr(numeric_only=True)
+        correlation_matrix=px.imshow(corr_matrix, text_auto=True, width = 1080, height = 500,
+                title= f"correlation matrix")
+        st.plotly_chart(correlation_matrix)
 
-               
-        
+
+
 def kpi_dashboard():
     st.markdown('### KPI dashboard')
 
@@ -47,7 +47,7 @@ def kpi_dashboard():
 
         st.markdown(
         f"""
-        <div style="background-color: #CCE5FF; border-radius: 10px; width: 80%; margin-top: 20px;" >
+        <div style="background-color: #CCE5FF; border-radius: 5px; width: 70%; margin-top: 20px; height:450px;" >
             <h3 style= "margin-left: 30px">Quick Stats About Dataset</h3>
             <hr>
             <h5 style= "margin-left: 30px">Data Size: {df.size}</h5
@@ -65,14 +65,14 @@ def kpi_dashboard():
         churn_by_contract_bar=px.bar(df, x="contract", color="churn", barmode="group", 
              title="Churn by Contract Type", 
              labels={"contract": "Contract Type", "churn": "Churn"},
-             template="plotly")
+             template="plotly", color_discrete_map= {'Yes': 'gold', 'No': 'pink'})
         st.plotly_chart(churn_by_contract_bar)
 
 
         churn_paymentmethod_bar=px.bar(df, x="paymentmethod", color="churn", 
              title="Churn by Payment Method",
              labels={"paymentmethod": "Payment Method", "count": "Count", "churn": "Churn"},
-             template="plotly", color_discrete_map={'yes':'brown', 'No':'violet'},barmode="group")
+             template="plotly", color_discrete_map={'Yes':'brown', 'No':'violet'},barmode="group")
         st.plotly_chart(churn_paymentmethod_bar)
 
         
@@ -84,14 +84,14 @@ def kpi_dashboard():
         churn_by_gender_bar=px.bar(df, x="gender", color="churn", barmode="group", 
         title="Churn by Gender", 
         labels={"gender": "Gender", "churn": "Churn"},
-        template="plotly", color_discrete_map={'yes':'red', 'No':'blue'})
+        template="plotly", color_discrete_map={'Yes':'red', 'No':'blue'})
         st.plotly_chart(churn_by_gender_bar)
 
 
         churn_by_internet=px.bar(df, x="internetservice", color="churn", barmode="group", 
         title="Churn by Internet Service", 
         labels={"internetservice": "Internet Service", "churn": "Churn"},
-        template="plotly", color_discrete_map={'yes':'orange', 'No':'green'})
+        template="plotly", color_discrete_map={'Yes':'orange', 'No':'green'})
         st.plotly_chart(churn_by_internet) 
             
 
