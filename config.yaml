@@ -1,0 +1,13 @@
+credentials:
+  usernames: 
+    iakwatia:
+      email: isaac.asantekwatia@gmail.com
+      name: isaac
+      password: '123456'  # This should be a hashed password
+cookie:
+  expiry_days: 0
+  key: cookie_signature_key
+  name: cookie_name
+preauthorized:
+  usernames:
+  - iakwatia
