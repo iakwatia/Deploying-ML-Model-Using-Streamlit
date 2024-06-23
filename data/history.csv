@@ -6,3 +6,5 @@ Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic Che
 Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic Check,10,10,No,0.87,2024-06-21,Random Forest
 Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic Check,10,10,No,0.87,2024-06-21,Random Forest
 Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic Check,10,10,No,0.92,2024-06-21,Logistic Regression
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,No,0.69,2024-06-23,Logistic Regression
+Male,0,Yes,Yes,0,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic Check,10,10,No,0.67,2024-06-23,Random Forest

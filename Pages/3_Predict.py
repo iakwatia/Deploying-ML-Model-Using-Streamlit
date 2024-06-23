@@ -193,24 +193,8 @@ if st.session_state['authentication_status']:
             st.write(f'### {final_prediction}')
             st.write(f'### {round(propability_of_no, 2)}%') 
 
-
-
-            
-
-        
-            # col1, col2 = st.columns(2)
-
-            # with col1:
-            #    st.write(f"### prediction:{final_prediction[0]}")
-
-            # with col2:
-            #     if final_prediction[0] == 'No':
                     
-            #         st.write(f' ### Probability: {round(propability_of_no, 2)}')
-            #     else:
-            #         st.write(f' ### Probability: {round(probability_of_yes, 2)}')
-
-    
+           
     st.divider()
 elif st.session_state['authentication_status'] is False:
     st.error('Wrong username/password')
@@ -221,4 +205,4 @@ elif st.session_state['authentication_status'] is None:
     Username: iakwatia
     Password: 123456
     """)    
-    #st.write(st.session_state)
+    st.write(st.session_state)
