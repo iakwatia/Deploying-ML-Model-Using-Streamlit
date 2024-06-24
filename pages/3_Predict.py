@@ -124,9 +124,9 @@ if st.session_state['authentication_status']:
         df['prediction'] = prediction
         
         if prediction == 'No':
-            df['probability']= f'{round(probability[0][0], 2)}'
+            df['probability']= f'{round(probability[0][0], 2)*100}'
         else:
-            df['probability'] = f'{round(probability[0][1], 2)}'
+            df['probability'] = f'{round(probability[0][1], 2)*100}'
 
         
         df['time_of_prediction']= datetime.date.today()
