@@ -133,10 +133,10 @@ if st.session_state['authentication_status']:
             kpi_dashboard()
 
 elif st.session_state['authentication_status'] is False:
-    st.error('Wrong username/password')
+     st.error('Wrong username/password')
 elif st.session_state['authentication_status'] is None:
-    st.info('Login to get access to the app')
-    st.code("""
+     st.info('Login to get access to the app')
+     st.code("""
     Test Account
     Username: iakwatia
     Password: 123456
