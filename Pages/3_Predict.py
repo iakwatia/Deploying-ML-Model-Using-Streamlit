@@ -205,4 +205,8 @@ elif st.session_state['authentication_status'] is None:
     Username: iakwatia
     Password: 123456
     """)    
+<<<<<<< HEAD
      st.write(st.session_state)
+=======
+    #st.write(st.session_state)
+>>>>>>> b93497bc9306266209c400030e3c6cd7f9b288d8
