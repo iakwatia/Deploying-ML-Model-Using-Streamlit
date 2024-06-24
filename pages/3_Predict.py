@@ -204,5 +204,6 @@ elif st.session_state['authentication_status'] is None:
     Test Account
     Username: iakwatia
     Password: 123456
-    """)    
-     st.write(st.session_state)
+    """)
+         
+     #st.write(st.session_state)
